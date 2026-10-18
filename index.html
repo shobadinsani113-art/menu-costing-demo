@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Bean &amp; Leaf · Menu Costing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="header">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="30" height="30"><path d="M16 3c6 4 9 9 9 14a9 9 0 0 1-18 0c0-5 3-10 9-14Z" fill="currentColor"/><path d="M16 8c-2 4-2 12 0 20" stroke="var(--surface)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <h1 class="brand-name" id="brandName">Menu Costing</h1>
+          <p class="brand-tag">Menu costing &amp; pricing</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span class="saved" id="savedIndicator" aria-live="polite"></span>
+        <button class="btn btn-primary" id="addMenuBtn" type="button"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Add menu</span></button>
+        <button class="btn btn-quiet" id="printBtn" type="button"><svg class="i" viewBox="0 0 24 24"><path d="M7 9V3h10v6M7 17H4v-7h16v7h-3M7 14h10v7H7z"/></svg><span>Print / Save as PDF</span></button>
+        <button class="btn btn-quiet btn-icon" id="themeBtn" type="button" aria-label="Toggle dark mode"><svg class="i" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg></button>
+      </div>
+    </header>
+
+    <section class="summary" id="summary" aria-label="Summary"></section>
+
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button class="tab" role="tab" id="tab-menus" data-tab="menus" aria-selected="true">Menus</button>
+      <button class="tab" role="tab" id="tab-ingredients" data-tab="ingredients" aria-selected="false">Ingredients</button>
+      <button class="tab" role="tab" id="tab-settings" data-tab="settings" aria-selected="false">Costs &amp; Settings</button>
+    </nav>
+
+    <main>
+      <section class="panel" id="panel-menus" role="tabpanel" aria-labelledby="tab-menus">
+        <div class="toolbar">
+          <div class="chips" id="categoryChips"></div>
+          <div class="toolbar-right">
+            <label class="search">
+              <span class="sr-only">Search menus</span>
+              <svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+              <input type="search" id="menuSearch" placeholder="Search menus" />
+            </label>
+            <label class="select-wrap">
+              <span class="sr-only">Sort menus</span>
+              <select id="menuSort">
+                <option value="name">Sort: Name</option>
+                <option value="hpp">Sort: HPP high to low</option>
+                <option value="marginDesc">Sort: Margin high to low</option>
+                <option value="marginAsc">Sort: Margin low to high</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div id="menuGroups"></div>
+      </section>
+
+      <section class="panel" id="panel-ingredients" role="tabpanel" aria-labelledby="tab-ingredients" hidden>
+        <div class="toolbar">
+          <label class="search">
+            <span class="sr-only">Search ingredients</span>
+            <svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+            <input type="search" id="ingredientSearch" placeholder="Search ingredients" />
+          </label>
+          <button class="btn btn-primary" id="addIngredientBtn" type="button"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Add ingredient</span></button>
+        </div>
+        <div class="table-scroll"><table class="table" id="ingredientTable"></table></div>
+      </section>
+
+      <section class="panel" id="panel-settings" role="tabpanel" aria-labelledby="tab-settings" hidden>
+        <div id="settingsPanel" class="settings"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Menu editor -->
+  <div class="overlay" id="menuModal" hidden>
+    <div class="dialog dialog-wide" role="dialog" aria-modal="true" aria-labelledby="menuModalTitle">
+      <div class="dialog-head">
+        <h2 id="menuModalTitle">Add menu</h2>
+        <button class="btn btn-quiet btn-icon" type="button" data-close aria-label="Close"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="dialog-body" id="menuModalBody"></div>
+      <div class="dialog-foot">
+        <button class="btn btn-quiet" type="button" data-close>Cancel</button>
+        <button class="btn btn-primary" type="button" id="menuSaveBtn">Save menu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ingredient editor -->
+  <div class="overlay overlay-top" id="ingredientModal" hidden>
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="ingredientModalTitle">
+      <div class="dialog-head">
+        <h2 id="ingredientModalTitle">Add ingredient</h2>
+        <button class="btn btn-quiet btn-icon" type="button" data-close aria-label="Close"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="dialog-body" id="ingredientModalBody"></div>
+      <div class="dialog-foot">
+        <button class="btn btn-quiet" type="button" data-close>Cancel</button>
+        <button class="btn btn-primary" type="button" id="ingredientSaveBtn">Save ingredient</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm / prompt dialog -->
+  <div class="overlay overlay-top2" id="askModal" hidden>
+    <div class="dialog dialog-small" role="alertdialog" aria-modal="true" aria-labelledby="askTitle">
+      <div class="dialog-head"><h2 id="askTitle">Confirm</h2></div>
+      <div class="dialog-body" id="askBody"></div>
+      <div class="dialog-foot">
+        <button class="btn btn-quiet" type="button" id="askCancel">Cancel</button>
+        <button class="btn btn-primary" type="button" id="askOk">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <input type="file" id="importFile" accept="application/json,.json" hidden />
+  <div class="print-report" id="printReport"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

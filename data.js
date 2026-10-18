@@ -1,0 +1,78 @@
+/* data.js — default settings and sample data for Bean & Leaf (coffee shop, USD) */
+var SAMPLE_DATA = {
+  version: 1,
+  settings: {
+    businessName: 'Bean & Leaf',
+    currency: 'USD',
+    targetMargin: 65,
+    roundingStep: 0.1,
+    roundingStepCustom: false,
+    priceEnding: 'step',
+    deliveryCommission: 25,
+    includeOverhead: true,
+    overhead: [
+      { id: 'oh_gas', name: 'Gas', amount: 95 },
+      { id: 'oh_power', name: 'Electricity', amount: 420 },
+      { id: 'oh_water', name: 'Water', amount: 70 },
+      { id: 'oh_labor', name: 'Labor', amount: 3600 },
+      { id: 'oh_rent', name: 'Rent', amount: 2400 }
+    ],
+    portionsPerMonth: 12000,
+    theme: 'system'
+  },
+  categories: [
+    { id: 'cat_coffee', name: 'Coffee' },
+    { id: 'cat_tea', name: 'Tea' },
+    { id: 'cat_pastry', name: 'Pastry' }
+  ],
+  ingredients: [
+    { id: 'ing_beans', name: 'Espresso beans', qty: 5, unit: 'lb', price: 64, waste: 2, note: 'House blend' },
+    { id: 'ing_milk', name: 'Whole milk', qty: 128, unit: 'fl oz', price: 4.79, waste: 3, note: '1 gallon' },
+    { id: 'ing_oat', name: 'Oat milk', qty: 64, unit: 'fl oz', price: 5.49, waste: 3, note: 'Barista edition' },
+    { id: 'ing_vanilla', name: 'Vanilla syrup', qty: 750, unit: 'ml', price: 11.99, waste: 0, note: '' },
+    { id: 'ing_caramel', name: 'Caramel syrup', qty: 750, unit: 'ml', price: 11.99, waste: 0, note: '' },
+    { id: 'ing_hazelnut', name: 'Hazelnut syrup', qty: 750, unit: 'ml', price: 12.49, waste: 0, note: '' },
+    { id: 'ing_choc', name: 'Chocolate sauce', qty: 64, unit: 'fl oz', price: 18.5, waste: 0, note: '' },
+    { id: 'ing_matcha', name: 'Ceremonial matcha', qty: 100, unit: 'g', price: 34, waste: 0, note: '' },
+    { id: 'ing_chai', name: 'Chai concentrate', qty: 32, unit: 'fl oz', price: 6.99, waste: 0, note: '' },
+    { id: 'ing_earlgrey', name: 'Earl Grey tea bags', qty: 100, unit: 'pcs', price: 9.5, waste: 0, note: '' },
+    { id: 'ing_honey', name: 'Honey', qty: 1, unit: 'lb', price: 7.5, waste: 0, note: '' },
+    { id: 'ing_lemon', name: 'Lemons', qty: 10, unit: 'pcs', price: 4.5, waste: 0, note: '' },
+    { id: 'ing_flour', name: 'All-purpose flour', qty: 25, unit: 'lb', price: 16, waste: 0, note: '' },
+    { id: 'ing_butter', name: 'Butter, unsalted', qty: 1, unit: 'lb', price: 5.2, waste: 2, note: '' },
+    { id: 'ing_sugar', name: 'Cane sugar', qty: 10, unit: 'lb', price: 8.9, waste: 0, note: '' },
+    { id: 'ing_eggs', name: 'Eggs', qty: 30, unit: 'pcs', price: 9.6, waste: 0, note: '' },
+    { id: 'ing_yeast', name: 'Instant yeast', qty: 1, unit: 'lb', price: 6, waste: 0, note: '' },
+    { id: 'ing_blueberry', name: 'Blueberries', qty: 3, unit: 'lb', price: 12, waste: 5, note: 'Frozen' },
+    { id: 'ing_banana', name: 'Bananas', qty: 3, unit: 'lb', price: 1.8, waste: 35, note: 'Peel loss' },
+    { id: 'ing_cup', name: '12 oz hot cup', qty: 1000, unit: 'pcs', price: 85, waste: 0, note: '' },
+    { id: 'ing_lid', name: 'Cup lid', qty: 1000, unit: 'pcs', price: 35, waste: 0, note: '' },
+    { id: 'ing_bag', name: 'Pastry bag', qty: 500, unit: 'pcs', price: 18, waste: 0, note: '' }
+  ],
+  menus: [
+    { id: 'm_espresso', name: 'Espresso', categoryId: 'cat_coffee', portions: 1, price: 3.5, deliveryPrice: null,
+      recipe: [ { ingredientId: 'ing_beans', qty: 18, unit: 'g' }, { ingredientId: 'ing_cup', qty: 1, unit: 'pcs' }, { ingredientId: 'ing_lid', qty: 1, unit: 'pcs' } ] },
+    { id: 'm_latte', name: 'Caffè Latte', categoryId: 'cat_coffee', portions: 1, price: 4.95, deliveryPrice: 6.6,
+      recipe: [ { ingredientId: 'ing_beans', qty: 18, unit: 'g' }, { ingredientId: 'ing_milk', qty: 9, unit: 'fl oz' }, { ingredientId: 'ing_cup', qty: 1, unit: 'pcs' }, { ingredientId: 'ing_lid', qty: 1, unit: 'pcs' } ] },
+    { id: 'm_vanilla', name: 'Vanilla Latte', categoryId: 'cat_coffee', portions: 1, price: 5.75, deliveryPrice: 7.3,
+      recipe: [ { ingredientId: 'ing_beans', qty: 18, unit: 'g' }, { ingredientId: 'ing_milk', qty: 8, unit: 'fl oz' }, { ingredientId: 'ing_vanilla', qty: 30, unit: 'ml' }, { ingredientId: 'ing_cup', qty: 1, unit: 'pcs' }, { ingredientId: 'ing_lid', qty: 1, unit: 'pcs' } ] },
+    { id: 'm_caramel', name: 'Caramel Macchiato', categoryId: 'cat_coffee', portions: 1, price: 6.25, deliveryPrice: null,
+      recipe: [ { ingredientId: 'ing_beans', qty: 18, unit: 'g' }, { ingredientId: 'ing_milk', qty: 8, unit: 'fl oz' }, { ingredientId: 'ing_caramel', qty: 30, unit: 'ml' }, { ingredientId: 'ing_vanilla', qty: 10, unit: 'ml' }, { ingredientId: 'ing_cup', qty: 1, unit: 'pcs' }, { ingredientId: 'ing_lid', qty: 1, unit: 'pcs' } ] },
+    { id: 'm_hazelnut', name: 'Hazelnut Oat Latte', categoryId: 'cat_coffee', portions: 1, price: 5.95, deliveryPrice: 7.9,
+      recipe: [ { ingredientId: 'ing_beans', qty: 18, unit: 'g' }, { ingredientId: 'ing_oat', qty: 9, unit: 'fl oz' }, { ingredientId: 'ing_hazelnut', qty: 30, unit: 'ml' }, { ingredientId: 'ing_cup', qty: 1, unit: 'pcs' }, { ingredientId: 'ing_lid', qty: 1, unit: 'pcs' } ] },
+    { id: 'm_mocha', name: 'Mocha', categoryId: 'cat_coffee', portions: 1, price: 5.75, deliveryPrice: null,
+      recipe: [ { ingredientId: 'ing_beans', qty: 18, unit: 'g' }, { ingredientId: 'ing_milk', qty: 8, unit: 'fl oz' }, { ingredientId: 'ing_choc', qty: 1.5, unit: 'fl oz' }, { ingredientId: 'ing_cup', qty: 1, unit: 'pcs' }, { ingredientId: 'ing_lid', qty: 1, unit: 'pcs' } ] },
+    { id: 'm_matcha', name: 'Matcha Latte', categoryId: 'cat_tea', portions: 1, price: 5.5, deliveryPrice: 7.3,
+      recipe: [ { ingredientId: 'ing_matcha', qty: 4, unit: 'g' }, { ingredientId: 'ing_milk', qty: 9, unit: 'fl oz' }, { ingredientId: 'ing_vanilla', qty: 10, unit: 'ml' }, { ingredientId: 'ing_cup', qty: 1, unit: 'pcs' }, { ingredientId: 'ing_lid', qty: 1, unit: 'pcs' } ] },
+    { id: 'm_chai', name: 'Chai Latte', categoryId: 'cat_tea', portions: 1, price: 5.75, deliveryPrice: null,
+      recipe: [ { ingredientId: 'ing_chai', qty: 5, unit: 'fl oz' }, { ingredientId: 'ing_milk', qty: 5, unit: 'fl oz' }, { ingredientId: 'ing_cup', qty: 1, unit: 'pcs' }, { ingredientId: 'ing_lid', qty: 1, unit: 'pcs' } ] },
+    { id: 'm_earlgrey', name: 'Honey Lemon Earl Grey', categoryId: 'cat_tea', portions: 1, price: 3.95, deliveryPrice: 5.3,
+      recipe: [ { ingredientId: 'ing_earlgrey', qty: 1, unit: 'pcs' }, { ingredientId: 'ing_honey', qty: 0.75, unit: 'oz' }, { ingredientId: 'ing_lemon', qty: 0.25, unit: 'pcs' }, { ingredientId: 'ing_cup', qty: 1, unit: 'pcs' }, { ingredientId: 'ing_lid', qty: 1, unit: 'pcs' } ] },
+    { id: 'm_croissant', name: 'Butter Croissant', categoryId: 'cat_pastry', portions: 12, price: 3.95, deliveryPrice: null,
+      recipe: [ { ingredientId: 'ing_flour', qty: 500, unit: 'g' }, { ingredientId: 'ing_butter', qty: 300, unit: 'g' }, { ingredientId: 'ing_sugar', qty: 55, unit: 'g' }, { ingredientId: 'ing_eggs', qty: 2, unit: 'pcs' }, { ingredientId: 'ing_yeast', qty: 10, unit: 'g' }, { ingredientId: 'ing_milk', qty: 5, unit: 'fl oz' }, { ingredientId: 'ing_bag', qty: 12, unit: 'pcs' } ] },
+    { id: 'm_muffin', name: 'Blueberry Muffin', categoryId: 'cat_pastry', portions: 12, price: 3.5, deliveryPrice: 4.7,
+      recipe: [ { ingredientId: 'ing_flour', qty: 360, unit: 'g' }, { ingredientId: 'ing_sugar', qty: 200, unit: 'g' }, { ingredientId: 'ing_butter', qty: 115, unit: 'g' }, { ingredientId: 'ing_eggs', qty: 2, unit: 'pcs' }, { ingredientId: 'ing_milk', qty: 8, unit: 'fl oz' }, { ingredientId: 'ing_blueberry', qty: 10, unit: 'oz' }, { ingredientId: 'ing_bag', qty: 12, unit: 'pcs' } ] },
+    { id: 'm_banana', name: 'Banana Bread Slice', categoryId: 'cat_pastry', portions: 10, price: 3.75, deliveryPrice: null,
+      recipe: [ { ingredientId: 'ing_banana', qty: 1, unit: 'lb' }, { ingredientId: 'ing_flour', qty: 250, unit: 'g' }, { ingredientId: 'ing_sugar', qty: 150, unit: 'g' }, { ingredientId: 'ing_butter', qty: 115, unit: 'g' }, { ingredientId: 'ing_eggs', qty: 2, unit: 'pcs' }, { ingredientId: 'ing_bag', qty: 10, unit: 'pcs' } ] }
+  ]
+};
